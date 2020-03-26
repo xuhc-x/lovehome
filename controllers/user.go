@@ -21,7 +21,8 @@ func (c *UserController)Reg(){
 	resp:=make(map[string]interface{})
 	defer c.ReData(resp)
 
-	json.Unmarshal(c.Ctx.Input.RequestBody, &resp)
+	json.Unmarshal(c.Ctx.Input.RequestBody, &resp)  //用户注册，设置json为交互格式，获取request body 里的json数据
+	fmt.Print("resp=",&resp)
 	o:=orm.NewOrm()
 	user:=models.User{}
 	user.Password_hash=resp["password"].(string)

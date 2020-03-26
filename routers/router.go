@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"lovehome/controllers"
 	"github.com/astaxie/beego"
+	"lovehome/controllers"
 )
 
 func init() {
@@ -11,4 +11,6 @@ func init() {
 	beego.Router("/api/v1.0/houses/index", &controllers.HouseIndexController{},"get:GetHouseIndex")
 	beego.Router("/api/v1.0/session", &controllers.SessionController{},"get:GetSessionData;delete:DeleteSessionData")
 	beego.Router("/api/v1.0/users", &controllers.UserController{},"post:Reg")
+	beego.Router("/api/v1.0/sessions", &controllers.SessionController{},"post:Login")
+
 }

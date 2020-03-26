@@ -12,16 +12,16 @@ import (
 func main() {
 	ignoreStaticPath()
 	//models.TestUploadByFilename("main.go")
-	beego.BConfig.WebConfig.Session.SessionOn = true
+	beego.BConfig.WebConfig.Session.SessionOn = true  //使用session模块的配置，设置开启
 	beego.Run(":8098")
 }
 
 func ignoreStaticPath() {
 
 	//透明static
-	//beego.SetStaticPath("group1/M00/","fdfs/storage_data/data/")
+	beego.SetStaticPath("group1/M00/","fdfs/storage_data/data/")
 
-	beego.InsertFilter("/", beego.BeforeRouter, TransparentStatic)
+	beego.InsertFilter("/", beego.BeforeRouter, TransparentStatic)  //分离筛选，直接跳到页面
 	beego.InsertFilter("/*", beego.BeforeRouter, TransparentStatic)
 }
 

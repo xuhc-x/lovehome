@@ -66,7 +66,7 @@ func (c *SessionController)Login(){
 	user:=models.User{Name:resp["mobile"].(string)}
 
 	qs:=o.QueryTable("user")
-	err:=qs.Filter("mobile","1111").One(&user)
+	err:=qs.Filter("mobile",resp["mobile"].(string)).One(&user)
 	if err!= nil {
 		resp["errno"]=models.RECODE_DATAERR
 		resp["errmsg"]=models.RecodeText(models.RECODE_DATAERR)
@@ -81,7 +81,7 @@ func (c *SessionController)Login(){
 	}
 	//添加session
 
-	c.SetSession("name",resp["mobile"])
+	c.SetSession("name",user.Name)
 	c.SetSession("mobile",resp["mobile"])
 	c.SetSession("user_id",user.Id)
 	//返回json数据给前端

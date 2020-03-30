@@ -11,6 +11,7 @@ import (
 
 func main() {
 	ignoreStaticPath()
+	//models.UpLoadFile("main.go")
 	//models.TestUploadByFilename("main.go")
 	beego.BConfig.WebConfig.Session.SessionOn = true  //使用session模块的配置，设置开启
 	beego.Run(":8098")

@@ -29,11 +29,11 @@ func (c *AreaController) GetArea() {
 	defer c.RetData(resp)
 	//从redis缓存中拿数据
 	cacheCon, err := cache.NewCache("redis", `{"key":"lovehome","conn":":6399","dbNum":"0"}`)
-	if areaData:=cacheCon.Get("area");areaData!=nil{
-		resp["data"]=areaData
-		fmt.Print("get data from cache===",resp["data"])
-		return
-	}
+	//if areaData:=cacheCon.Get("area");areaData!=nil{
+	//	resp["data"]=areaData
+	//	fmt.Print("get data from cache===",resp["data"])
+	//	return
+	//}
 
 	//从mysql数据库中拿到数据
 	var areas []models.Area
@@ -51,13 +51,9 @@ func (c *AreaController) GetArea() {
 		resp["errmsg"]=models.RecodeText(models.RECODE_NODATA)
 		return
 	}
-	//resp["errno"]=models.RECODE_OK
-	//resp["errmsg"]=models.RecodeText(models.RECODE_OK)
-
 	resp["data"]=areas
 	//把数据转换成json格式存入缓存
 	jsonStr,err:=json.Marshal(areas)
-	fmt.Print("jsonStr====",jsonStr)
 	if err !=nil{
 		fmt.Print("encoding err")
 		return
